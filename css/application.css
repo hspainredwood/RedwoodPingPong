@@ -1,0 +1,47 @@
+/* global body padding */
+body {
+  padding-top:    20px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top:    30px;
+    padding-bottom: 30px;
+  }
+}
+
+
+/* global spacing overrides */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-top: 0;
+}
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.navbar-fixed-top,
+.navbar-static-top {
+  border-bottom: 0;
+}
+
+
+.nav-link {
+  font-size:24px;
+  margin-left: 16px;
+}
+
+.nav-link.active {
+  color: #ddd;
+}
+
+h3 {
+  margin-bottom: 30px;
+}
+
+output {
+  padding-top: 0;
+  padding-left: 10px;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Redwood Ping Pong</title>
+
+	<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+	<link href="css/toolkit-light.css" rel="stylesheet">
+	<link href="css/application.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="playerController">
+	<div class="container">
+		<div class="row m-b-md">
+			<div class="col-md-4">
+				<h1>Redwood Ping Pong</h1>
+			</div>
+			<div class="col-md-8">
+				<div class="pull-right">
+					<nav class="nav nav-inline">
+						<a class="nav-link active" href="#">Players</a>
+						<a class="nav-link" href="#">Tournaments</a>
+						<a class="nav-link" href="#">Rankings</a>
+					</nav>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-sm-2 sidebar">
+				<nav class="sidebar-nav">
+					<div class="collapse nav-toggleable-sm" id="nav-toggleable-sm">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="nav-header">Players</li>
+							<li ng-click="selectPlayer(player)" ng-repeat="player in players">
+								<a href="#">{{ player.firstName }} {{ player.record.wins }}-{{ player.record.losses }}</a>
+							</li>
+							
+						</ul>
+
+					</div>
+				</nav>
+			</div>
+			<div class="col-sm-10 content">
+				<div class="dashhead">
+					<div class="dashhead-titles">
+						<h6 class="dashhead-subtitle">Player</h6>
+						<h2 class="dashhead-title">{{ selectedPlayer.firstName }} {{ selectedPlayer.lastName }}</h2>
+					</div>
+
+
+				</div>
+
+
+				<div class="hr-divider m-t-md m-b">
+					<h3 class="hr-divider-content hr-divider-heading">Quick stats</h3>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<h3>Summary</h3>
+						<p>{{ selectedPlayer.summary }}</p>
+					</div>
+					<div class="col-md-3">
+						<h3>Info</h3>
+						<form>
+							<fieldset class="m-b-md">
+								<legend>Record</legend>
+								<div class="form-group">
+									<label for="">Wins</label>
+									<input type="number" class="form-control" ng-model="selectedPlayer.record.wins">
+								</div>
+								<div class="form-group">
+									<label for="">Losses</label>
+									<input type="number" class="form-control" ng-model="selectedPlayer.record.losses">
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>Style</legend>
+								<div class="form-group">
+									<label for="">Power</label>
+									<input type="number" class="form-control" ng-model="selectedPlayer.style.power">
+
+
+								</div>
+								<div class="form-group">
+									<label for="">Spin</label>
+									<input type="number" class="form-control" ng-model="selectedPlayer.style.spin">
+
+								</div>
+								<div class="form-group">
+									<label for="">Control</label>
+									<input type="number" class="form-control" ng-model="selectedPlayer.style.control">
+								</div>
+								<button type="" class="btn btn-default pull-right">Submit</button>
+							</fieldset>
+						</form>
+					</div>
+					<div class="col-md-3">
+						<h3>Last 10 Games</h3>
+						<ul class="list-group">
+							<li ng-repeat="game in selectedPlayer.games" class="list-group-item">{{ game.result }} vs {{ game.opponent }} - {{ game.date | date : "MM/yyyy" }}</li>
+						
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h3>Add Game</h3>
+						<form>
+							<fieldset>
+								<legend>Add Game</legend>
+								<div class="form-group">
+									<label for="">Opponent</label>
+									<select class="form-control" ng-model="newGame.opponent">
+                        <option ng-repeat="player in players | filter: filterPlayers">{{ player.firstName }} {{ player.lastName}}</option>
+                        
+                    </select>
+								</div>
+                                <div class="form-group">
+                                    <label for="">Game Date {{ newGame.date  }}</label>
+                                    <input type="date" ng-model="newGame.date" />
+                                </div>
+								<label for="">Results{{ newGame.result }}</label>
+								<div class="radio">
+									<label>
+                        <input type="radio" name="resultRadio" id="resultRadio1" value="Win" checked ng-model="newGame.result">
+                        Win
+                    </label>
+								</div>
+								<div class="radio">
+									<label>
+                        <input type="radio" name="resultRadio" id="resultRadio2" value="Loss" ng-model="newGame.result">
+                        Loss
+                    </label>
+								</div>
+
+								<button ng-click="addNewGame()" type="submit" class="btn btn-default pull-right">Submit</button>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<script src="./js/jquery.min.js"></script>
+				<script src="./js/toolkit.js"></script>
+                <script src="./js/modules/app.js"></script>
+                <script src="./js/controllers/playerController.js"></script>
+</body>
+
+</html>
